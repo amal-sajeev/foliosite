@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amal Sajeev - AI Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --neon-pink: #ff0080;
+            --neon-cyan: #00ffff;
+            --neon-purple: #8000ff;
+            --neon-yellow: #ffff00;
+            --dark-bg: #0a0a0a;
+            --grid-color: rgba(255, 0, 128, 0.3);
+            --card-bg: rgba(16, 16, 32, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 128, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 128, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -2;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Floating Neon Orbs */
+        .neon-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--neon-pink), transparent);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--neon-cyan), transparent);
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--neon-purple), transparent);
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, rgba(255, 0, 128, 0.1), rgba(0, 255, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--neon-pink);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 
+                /* Black bevels for depth and contrast */
+                1px 1px 0px #000000,
+                2px 2px 2px #000000,
+                3px 3px 4px #000000,
+                4px 4px 6px rgba(0, 0, 0, 0.8),
+                /* Neon glow effects */
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink),
+                0 0 15px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                /* Colored outline accents */
+                6px 6px 0px var(--neon-cyan),
+                -2px -2px 0px var(--neon-purple);
+            animation: titlePulse 3s ease-in-out infinite alternate;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes titlePulse {
+            from { 
+                text-shadow: 
+                    /* Black bevels for depth and contrast */
+                    1px 1px 0px #000000,
+                    2px 2px 2px #000000,
+                    3px 3px 4px #000000,
+                    4px 4px 6px rgba(0, 0, 0, 0.8),
+                    /* Neon glow effects */
+                    0 0 5px var(--neon-pink),
+                    0 0 10px var(--neon-pink),
+                    0 0 15px var(--neon-pink),
+                    0 0 20px var(--neon-pink),
+                    /* Colored outline accents */
+                    6px 6px 0px var(--neon-cyan),
+                    -2px -2px 0px var(--neon-purple);
+            }
+            to { 
+                text-shadow: 
+                    /* Black bevels for depth and contrast */
+                    1px 1px 0px #000000,
+                    2px 2px 2px #000000,
+                    3px 3px 4px #000000,
+                    4px 4px 6px rgba(0, 0, 0, 0.8),
+                    /* Neon glow effects */
+                    0 0 10px var(--neon-cyan),
+                    0 0 20px var(--neon-cyan),
+                    0 0 30px var(--neon-cyan),
+                    0 0 40px var(--neon-cyan),
+                    /* Colored outline accents */
+                    6px 6px 0px var(--neon-pink),
+                    -2px -2px 0px var(--neon-yellow);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid var(--neon-pink);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 128, 0.3);
+            border-color: var(--neon-cyan);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 128, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink);
+            position: relative;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), transparent);
+            border-radius: 1px;
+        }
+
+        .card-subtitle {
+            color: var(--neon-cyan);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+
+        .card-date {
+            color: var(--neon-yellow);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-shadow: 0 0 3px var(--neon-yellow);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon-purple);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-yellow);
+        }
+
+        .skill-category h3 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+        }
+
+        /* Enhanced Text Styling */
+        .card p, .card li {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .card strong {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .card ul li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-size: 0.8rem;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--neon-cyan);
+            margin-top: 1rem;
+        }
+
+        .skill-category div {
+            margin-top: 1rem;
+        }
+
+        .cert-item p {
+            color: var(--neon-yellow);
+            font-weight: 500;
+            text-shadow: 0 0 3px var(--neon-yellow);
+            margin-top: 0.5rem;
+        }
+
+        .cert-item h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+            background: linear-gradient(135deg, rgba(255, 0, 128, 0.1), rgba(0, 255, 255, 0.1));
+            border-left: 4px solid var(--neon-pink);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .key-results h4 {
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .key-results li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        /* Project Highlights */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 50px 50px 0;
+            border-color: transparent var(--neon-pink) transparent transparent;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Education */
+        .education-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(128, 0, 255, 0.1));
+            border: 2px solid var(--neon-purple);
+        }
+
+        /* Certifications */
+        .cert-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cert-item {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--neon-yellow);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--neon-pink);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-purple));
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* Glitch Effect for Special Elements */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--neon-pink);
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--neon-cyan);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, -1px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, 1px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="neon-orb orb-1"></div>
+    <div class="neon-orb orb-2"></div>
+    <div class="neon-orb orb-3"></div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <header>
+        <h1 class="hero-title glitch" data-text="AMAL SAJEEV">AMAL SAJEEV</h1>
+        <p class="hero-subtitle">AI Developer | Full-Stack Engineer</p>
+        <div class="contact-info">
+            <a href="mailto:amsajeev333@gmail.com" class="contact-item">📧 amsajeev333@gmail.com</a>
+            <a href="tel:+918618412695" class="contact-item">📱 +91 861 841 2695</a>
+            <span class="contact-item">📍 Bengaluru, India</span>
+            <a href="#" class="contact-item">🔗 GitHub Profile</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">WORK EXPERIENCE</h2>
+            
+            <div class="card">
+                <h3 class="card-title">Global Knowledge Technologies</h3>
+                <p class="card-subtitle">AI Developer</p>
+                <p class="card-date">January 2025 – Present | Bengaluru, India</p>
+                
+                <div class="key-results">
+                    <h4>🎯 Key Results</h4>
+                    <ul>
+                        <li>Saved company ₹13+ lakhs annually through custom RAG framework and Web Crawler development, eliminating expensive third-party service dependencies</li>
+                        <li>Secured all databases and set up processes to keep hosted legacy websites safe from intrusions</li>
+                    </ul>
+                </div>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h4 class="project-title">Stu - RAG LLM Chatbot</h4>
+                        <p>GKT's flagship RAG LLM-based chatbot with innovative long-term memory supporting Indic languages. Handled all prototype development and backend production APIs single-handedly.</p>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">EagleSearch Framework</h4>
+                        <p>Proprietary Retrieval-Augment-Generation framework supporting Pinecone, ElasticSearch, and Qdrant with multimodal embedding capabilities for 12 popular document formats.</p>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">EagleCrawler</h4>
+                        <p>Proprietary web-crawler that does visual and text crawling with vLLM embedding and splitting capabilities.</p>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">Dynotest</h4>
+                        <p>Dynamic Testing system and REST API from scratch that improves user learning efficiency and knowledge retention through adaptive testing algorithms.</p>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">TabSense IoT API</h4>
+                        <p>IoT API using image filtering and computer vision to detect table stains at institutions.</p>
+                    </div>
+                </div>
+
+                <p><strong>Stack:</strong> Python (Django, Flask, FastAPI, NLTK, Langchain, Streamlit); Java (Spring, Spring Boot); MongoDB; MySQL; QDrant; ElasticSearch; Linux (Ubuntu, CentOS); IBM Watsonx.ai; OpenAI, Ollama, Claude</p>
+            </div>
+
+            <div class="card">
+                <p class="card-subtitle">Software Developer</p>
+                <p class="card-date">March 2022 – December 2024</p>
+                <ul>
+                    <li>Developed WordPress-based marketing and educational platform websites</li>
+                    <li>Managed security, backups, and database migration for legacy PHP applications</li>
+                    <li>Authored 6 comprehensive courses covering AI, Machine Learning, LLMs, Python, Langchain, Blockchain, and Google Cloud Platform</li>
+                    <li>Managed security architecture and server hosting for all backend APIs and database structures</li>
+                    <li>Built PowerBI dashboards for examination management and results analysis</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">EDUCATION</h2>
+            <div class="card education-card">
+                <h3 class="card-title">Bachelor of Engineering</h3>
+                <p class="card-subtitle">Computer Science Engineering</p>
+                <p class="card-date">July 2022 | Bengaluru, Karnataka</p>
+                <p><strong>GPA:</strong> 7.8/10.0</p>
+                <p><strong>Final Year Project:</strong> A concealed weapon/path detection system using optimized image fusion for live video</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">TECHNICAL SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Spring</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">NLTK</span>
+                        <span class="tech-tag">Langchain</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Databases & Vector Stores</h3>
+                    <div>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">QDrant</span>
+                        <span class="tech-tag">ElasticSearch</span>
+                        <span class="tech-tag">Pinecone</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>AI/ML Platforms</h3>
+                    <div>
+                        <span class="tech-tag">IBM Watsonx.ai</span>
+                        <span class="tech-tag">OpenAI</span>
+                        <span class="tech-tag">Claude</span>
+                        <span class="tech-tag">Ollama</span>
+                        <span class="tech-tag">IBM Watson Discovery</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Infrastructure & Tools</h3>
+                    <div>
+                        <span class="tech-tag">Linux (Ubuntu)</span>
+                        <span class="tech-tag">CentOS</span>
+                        <span class="tech-tag">Google Cloud</span>
+                        <span class="tech-tag">PowerBI</span>
+                        <span class="tech-tag">WordPress</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Core Competencies</h3>
+                    <div>
+                        <span class="tech-tag">RAG Development</span>
+                        <span class="tech-tag">LLM Fine-tuning</span>
+                        <span class="tech-tag">REST API Development</span>
+                        <span class="tech-tag">System Architecture</span>
+                        <span class="tech-tag">Security Implementation</span>
+                        <span class="tech-tag">Vector Databases</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">CERTIFICATIONS</h2>
+            <div class="cert-list">
+                <div class="cert-item">
+                    <h4>Google Cloud Certified Associate Cloud Engineer</h4>
+                    <p>February 2023</p>
+                </div>
+                <div class="cert-item">
+                    <h4>Deep Learning Onramp - MathWorks</h4>
+                    <p>May 2020</p>
+                </div>
+                <div class="cert-item">
+                    <h4>Machine Learning Onramp - MathWorks</h4>
+                    <p>November 2020</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">INTERESTS</h2>
+            <div class="card">
+                <div style="text-align: center;">
+                    <span class="tech-tag">🏋️ Weightlifting</span>
+                    <span class="tech-tag">🧘 Meditation</span>
+                    <span class="tech-tag">📚 History</span>
+                    <span class="tech-tag">📖 Literature</span>
+                    <span class="tech-tag">✍️ Writing</span>
+                    <span class="tech-tag">♟️ Chess</span>
+                    <span class="tech-tag">⚫ Othello</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Scroll indicator
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollIndicator.style.transform = `scaleX(${scrollPercent / 100})`;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add mouse move effect for orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.neon-orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.5;
+                const xMove = (x - 0.5) * 20 * speed;
+                const yMove = (y - 0.5) * 20 * speed;
+                orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
+        });
+
+        // Add typing effect to hero title
+        const heroTitle = document.querySelector('.hero-title');
+        const text = 'AMAL SAJEEV';
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 150);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+
+        // Add particle effect on card hover
+        document.querySelectorAll('.card, .project-card').forEach(card => {
+            card.addEventListener('mouseenter', function(e) {
+                createParticles(e.target);
+            });
+        });
+
+        function createParticles(element) {
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = '#ff0080';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.animation = 'particleFloat 1s ease-out forwards';
+                
+                const rect = element.getBoundingClientRect();
+                particle.style.left = Math.random() * rect.width + 'px';
+                particle.style.top = Math.random() * rect.height + 'px';
+                
+                element.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
